@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -16,6 +18,24 @@ namespace Training
             Console.ReadLine();
         }
 
+
+        static bool SaveFile(string path)
+        {
+            var rnd = new Random();
+            var text = "";
+
+            for (int i = 0; i < 100_000; i++)
+            {
+                text += rnd.Next();
+            }
+
+            using(StreamWriter sw = new StreamWriter("", false, Encoding.ASCII))
+            {
+                sw.WriteLine();
+            }
+
+            return true;
+        }
 
         static void NewMethod()
         {
