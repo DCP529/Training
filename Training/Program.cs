@@ -19,11 +19,11 @@ namespace Training
 
         static void NewMethod()
         {
-            int j = 0;
+            int j = 90;
 
             for (int i = 0; i < 15; i++)
             {
-                j++;
+                j--;
                 Console.WriteLine(j);
             }
         }
