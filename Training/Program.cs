@@ -8,28 +8,44 @@ namespace Training
 {
     class Program
     {
+        public static object locker = new object();
+
         static void Main(string[] args)
         {
-            Thread thread1 = new Thread(new ThreadStart(NewMethod));
-            thread1.Start();
+            //Thread thread1 = new Thread(new ThreadStart(NewMethod));
+            //thread1.Start();
 
-            MethodAsync();
+            //MethodAsync();
 
+
+            var result = SaveFileAsync("text.txt");
+            var input = Console.ReadLine();
+
+            Console.WriteLine(result.Result);
             Console.ReadLine();
+
         }
 
+
+        static async Task<bool> SaveFileAsync(string path)
+        {
+            var result = await Task.Run(() => SaveFile(path));
+
+            return result;
+
+        }
 
         static bool SaveFile(string path)
         {
             var rnd = new Random();
             var text = "";
 
-            for (int i = 0; i < 100_000; i++)
+            for (int i = 0; i < 50000; i++)
             {
                 text += rnd.Next();
             }
 
-            using(StreamWriter sw = new StreamWriter("", false, Encoding.ASCII))
+            using (StreamWriter sw = new StreamWriter(path, false, Encoding.ASCII))
             {
                 sw.WriteLine();
             }
