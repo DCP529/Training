@@ -8,66 +8,79 @@ namespace Training
 {
     class Program
     {
-        public static object locker = new object();
-
+        
         static void Main(string[] args)
         {
-            //Thread thread1 = new Thread(new ThreadStart(NewMethod));
-            //thread1.Start();
-
-            //MethodAsync();
-
-
-            var result = SaveFileAsync("text.txt");
-            var input = Console.ReadLine();
-
-            Console.WriteLine(result.Result);
-            Console.ReadLine();
-
+            
         }
 
-
-        static async Task<bool> SaveFileAsync(string path)
+        public static async Task<decimal> SalaryPaperAsync(int count, int cost)
         {
-            var result = await Task.Run(() => SaveFile(path));
-
+            var result = await Task.Run(() => SalaryPaper(count, cost));
             return result;
-
         }
 
-        static bool SaveFile(string path)
+        public static decimal SalaryPaper(int count, int cost)
         {
-            var rnd = new Random();
-            var text = "";
+            double result;
 
-            for (int i = 0; i < 50000; i++)
+            if (count >= 1000)
             {
-                text += rnd.Next();
+                result = cost * 0.1;
+            }
+            else
+            {
+                result = cost * 0.05;
             }
 
-            using (StreamWriter sw = new StreamWriter(path, false, Encoding.ASCII))
-            {
-                sw.WriteLine();
-            }
-
-            return true;
+            return (decimal)result;
         }
 
-        static void NewMethod()
-        {
-            int j = 90;
 
-            for (int i = 0; i < 15; i++)
-            {
-                j--;
-                Console.WriteLine(j);
-            }
-        }
 
-        static async Task MethodAsync()
-        {
-            await Task.Run(() => NewMethod());
-            Console.WriteLine("It's so fucking deep");
-        }
+
+
+    //    static async Task<bool> SaveFileAsync(string path)
+    //    {
+    //        var result = await Task.Run(() => SaveFile(path));
+
+    //        return result;
+
+    //    }
+
+    //    static bool SaveFile(string path)
+    //    {
+    //        var rnd = new Random();
+    //        var text = "";
+
+    //        for (int i = 0; i < 50000; i++)
+    //        {
+    //            text += rnd.Next();
+    //        }
+
+    //        using (StreamWriter sw = new StreamWriter(path, false, Encoding.ASCII))
+    //        {
+    //            sw.WriteLine();
+    //        }
+
+    //        return true;
+    //    }
+
+    //    static void NewMethod()
+    //    {
+    //        int j = 90;
+
+    //        for (int i = 0; i < 15; i++)
+    //        {
+    //            j--;
+    //            Console.WriteLine(j);
+    //        }
+    //    }
+
+    //    static async Task MethodAsync()
+    //    {
+    //        await Task.Run(() => NewMethod());
+    //        Console.WriteLine("It's so fucking deep");
+    //    }
     }
 }
