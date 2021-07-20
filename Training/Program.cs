@@ -11,13 +11,14 @@ namespace Training
         
         static void Main(string[] args)
         {
-            
+            SalaryPaperAsync(12,12);
+            Console.ReadLine();
         }
 
-        public static async Task<decimal> SalaryPaperAsync(int count, int cost)
+        public static async Task SalaryPaperAsync(int count, int cost)
         {
             var result = await Task.Run(() => SalaryPaper(count, cost));
-            return result;
+            Console.WriteLine($"Общая стоимость покупки {count} штук туалетной буваги состовляет {result}");
         }
 
         public static decimal SalaryPaper(int count, int cost)
@@ -26,11 +27,11 @@ namespace Training
 
             if (count >= 1000)
             {
-                result = cost * 0.1;
+                result = (cost - cost * 0.1) * count;
             }
             else
             {
-                result = cost * 0.05;
+                result = (cost - cost * 0.05) * count;
             }
 
             return (decimal)result;
