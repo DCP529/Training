@@ -6,82 +6,36 @@ using System.Threading.Tasks;
 
 namespace Training
 {
+
     class Program
     {
-        
+        public const int PROCENT = 1;
         static void Main(string[] args)
         {
-            SalaryPaperAsync(12,12);
+            SalaryMonth(2_100_000, 60, 60_000, 40_000);
             Console.ReadLine();
         }
 
-        public static async Task SalaryPaperAsync(int count, int cost)
+        public static void SalaryMonth(decimal sum, int amountMonth, decimal person1Salary, decimal person2Salary)
         {
-            var result = await Task.Run(() => SalaryPaper(count, cost));
-            Console.WriteLine($"Общая стоимость покупки {count} штук туалетной буваги состовляет {result}");
-        }
+            decimal salaryMonth = sum / amountMonth;
 
-        public static decimal SalaryPaper(int count, int cost)
-        {
-            double result;
-
-            if (count >= 1000)
+            for (decimal i = 0M; i < PROCENT; i+=0.01M)
             {
-                result = (cost - cost * 0.1) * count;
-            }
-            else
-            {
-                result = (cost - cost * 0.05) * count;
-            }
+                decimal person1SalaryProcent = person1Salary * i;
+                decimal person2SalaryProcent = person2Salary * i;
 
-            return (decimal)result;
+                decimal sumSalaryProcent = person1SalaryProcent + person2SalaryProcent;
+
+                if (sumSalaryProcent == salaryMonth)
+                {
+                    Console.WriteLine(i);
+                }
+                else
+                {
+                    continue;
+                }
+            }
         }
-
-
-
-
-
-    //    static async Task<bool> SaveFileAsync(string path)
-    //    {
-    //        var result = await Task.Run(() => SaveFile(path));
-
-    //        return result;
-
-    //    }
-
-    //    static bool SaveFile(string path)
-    //    {
-    //        var rnd = new Random();
-    //        var text = "";
-
-    //        for (int i = 0; i < 50000; i++)
-    //        {
-    //            text += rnd.Next();
-    //        }
-
-    //        using (StreamWriter sw = new StreamWriter(path, false, Encoding.ASCII))
-    //        {
-    //            sw.WriteLine();
-    //        }
-
-    //        return true;
-    //    }
-
-    //    static void NewMethod()
-    //    {
-    //        int j = 90;
-
-    //        for (int i = 0; i < 15; i++)
-    //        {
-    //            j--;
-    //            Console.WriteLine(j);
-    //        }
-    //    }
-
-    //    static async Task MethodAsync()
-    //    {
-    //        await Task.Run(() => NewMethod());
-    //        Console.WriteLine("It's so fucking deep");
-    //    }
     }
 }
